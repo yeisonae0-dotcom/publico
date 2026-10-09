@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buenas Noches ✨</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: radial-gradient(circle at center, #1b0f2e 0%, #0d0614 100%);
+            color: #e2e8f0;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        .font-serif-custom {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .star {
+            position: absolute;
+            background-color: #ffffff;
+            border-radius: 50%;
+            animation: twinkle var(--duration) infinite ease-in-out;
+            opacity: var(--opacity);
+        }
+
+        @keyframes twinkle {
+            0%, 100% { transform: scale(1); opacity: var(--opacity); }
+            50% { transform: scale(1.3); opacity: 0.9; }
+        }
+
+        /* Shooting star effect */
+        .shooting-star {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(255,255,255,0.9), rgba(244,114,182,0));
+            border-radius: 9999px;
+            animation: shoot 3.5s infinite ease-in;
+            opacity: 0;
+        }
+
+        @keyframes shoot {
+            0% {
+                transform: translateX(0) translateY(0) rotate(-45deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(-550px) translateY(550px) rotate(-45deg);
+                opacity: 0;
+            }
+        }
+
+        /* High Transparency Liquid Glass Effect (~90% transparent feel) */
+        .liquid-glass-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        /* Typewriter cursor effect */
+        .typewriter-cursor {
+            display: inline-block;
+            width: 2px;
+            background-color: #f472b6;
+            animation: blink 0.8s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Floating hearts subtle animation */
+        .floating-heart {
+            position: absolute;
+            color: rgba(244, 114, 182, 0.4);
+            animation: floatUp 7s infinite linear;
+            bottom: -20px;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0) translateX(0) scale(0.5);
+                opacity: 0.6;
+            }
+            50% {
+                transform: translateY(-50vh) translateX(15px) scale(0.8);
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(-15px) scale(0.3);
+                opacity: 0;
+            }
+        }
+
+        /* Moon image container styling */
+        .moon-frame {
+            box-shadow: 0 0 25px rgba(244, 114, 182, 0.2);
+            transition: transform 0.5s ease;
+        }
+        .moon-frame:hover {
+            transform: scale(1.05);
+        }
+
+        /* Breathing animation for the main card */
+        @keyframes breathing {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.02);
+            }
+        }
+
+        .breathing-card {
+            animation: breathing 6s infinite ease-in-out;
+        }
+
+        /* Card internal delicate cascade animation (Only Pink Flowers) */
+        .card-cascade-item {
+            position: absolute;
+            color: rgba(244, 114, 182, 0.7);
+            animation: cardCascade var(--duration) infinite linear;
+            top: -20px;
+            user-select: none;
+            pointer-events: none;
+            text-shadow: 0 0 8px rgba(244, 114, 182, 0.5);
+        }
+
+        @keyframes cardCascade {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            15% {
+                opacity: 0.9;
+            }
+            85% {
+                opacity: 0.9;
+            }
+            100% {
+                transform: translateY(340px) translateX(25px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Smooth Zoom In / Zoom Out for Modal */
+        #custom-modal {
+            transition: opacity 0.3s ease;
+        }
+
+        #modal-box {
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+        }
+
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(13, 6, 20, 0.3);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(244, 114, 182, 0.3);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="relative flex flex-col items-center justify-center min-h-screen py-10 px-4 selection:bg-pink-500/30 selection:text-white">
+
+    <div id="stars-container" class="absolute inset-0 overflow-hidden pointer-events-none z-0"></div>
+
+    <main class="z-10 w-full max-w-sm liquid-glass-card breathing-card rounded-3xl p-8 flex flex-col items-center text-center relative my-auto overflow-hidden">
+        
+        <!-- Internal Card Cascade Container for pink flowers only -->
+        <div id="card-cascade-container" class="absolute inset-0 overflow-hidden pointer-events-none z-0"></div>
+
+        <!-- Custom Moon Graphic Image with a gorgeous light blue glowing border -->
+        <div class="relative mb-6 z-10">
+            <div class="absolute -inset-1.5 bg-gradient-to-tr from-sky-400/50 to-sky-200/30 rounded-full blur-md animate-pulse"></div>
+            <div class="moon-frame relative w-20 h-20 rounded-full overflow-hidden border-2 border-sky-300 bg-purple-950 flex items-center justify-center shadow-inner">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9IFczdGjt4E4Gg26DRDkP6oh2h2hIinbx5n-dnJA0vA&s=10" 
+                     alt="Buenas noches" 
+                     class="w-full h-full object-cover"
+                     onerror="this.src='https://placehold.co/100x100/1b0f2e/f472b6?text=🌙'">
+            </div>
+        </div>
+
+        <!-- Typewriter Title Container -->
+        <h1 id="typewriter-title" class="font-serif-custom text-4xl md:text-5xl font-normal text-pink-100/90 mb-3 tracking-wide min-h-[3.5rem] flex items-center justify-center z-10">
+            <span id="title-text"></span><span class="typewriter-cursor h-9 ml-0.5"></span>
+        </h1>
+
+        <div class="w-10 h-px bg-pink-400/30 mb-6 z-10"></div>
+
+        <!-- Poem text with consistent font styling and bold text -->
+        <div class="text-sm md:text-base text-purple-100/90 leading-relaxed mb-4 px-2 space-y-2 font-medium z-10">
+            <p class="font-semibold text-lg text-pink-200">"El día se va apagando,</p>
+            <p class="font-semibold text-lg text-pink-200">las estrellas brillan más,</p>
+            <p class="font-semibold text-lg">descansa tu mente un poco,</p>
+            <p class="font-semibold text-lg">que la paz te cubra ya." 🌙✨</p>
+        </div>
+
+    </main>
+
+    <!-- Enhanced Interactive Modal with Liquid Glass transparency and smooth zoom animations -->
+    <div id="custom-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden opacity-0">
+        <div class="liquid-glass-card max-w-xs w-full p-6 rounded-3xl text-center relative border border-white/15 shadow-2xl transform scale-75 opacity-0" id="modal-box">
+            <!-- Moon Graphic Image inside Modal -->
+            <div class="relative w-12 h-12 rounded-full overflow-hidden border-2 border-sky-300 bg-purple-950 flex items-center justify-center shadow-inner mx-auto mb-4">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9IFczdGjt4E4Gg26DRDkP6oh2h2hIinbx5n-dnJA0vA&s=10" 
+                     alt="Buenas noches" 
+                     class="w-full h-full object-cover"
+                     onerror="this.src='https://placehold.co/100x100/1b0f2e/f472b6?text=🌙'">
+            </div>
+            <h3 class="text-sm font-medium text-pink-200 mb-1">¡Deseo Estelar Enviado!</h3>
+            <p id="wish-message" class="text-xs text-purple-200/90 mb-4 leading-relaxed font-light">
+                Gracias por desearme buenas noches. ¡Tu deseo ya está brillando en el cielo para ti! 🌙✨
+            </p>
+            
+            <!-- Extra interactive wish selector inside modal connected to Formspree -->
+            <form id="wish-form" action="https://formspree.io/f/xlgodlzp" method="POST" class="grid grid-cols-2 gap-2 mb-5">
+                <input type="hidden" name="wish_type" id="wish-type-input" value="Abrazo">
+                <button type="submit" onclick="submitWish('🤗 Mandar Abrazo', 'Abrazo')" class="py-2 px-2 rounded-xl bg-white/5 hover:bg-white/15 text-[10px] text-pink-200 border border-white/10 transition-all cursor-pointer">
+                    🤗 Mandar Abrazo
+                </button>
+                <button type="submit" onclick="submitWish('🫂 Abrazo Grande', 'Abrazo Grande')" class="py-2 px-2 rounded-xl bg-white/5 hover:bg-white/15 text-[10px] text-pink-200 border border-white/10 transition-all cursor-pointer">
+                    🫂 Abrazo Grande
+                </button>
+            </form>
+
+            <button onclick="closeModal()" class="w-full py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-xs text-pink-200 transition-all border border-white/10 shadow-sm font-medium">
+                Cerrar con una sonrisa
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Typewriter Effect for Title
+        const textToType = "Buenas noches";
+        let charIndex = 0;
+        const titleSpan = document.getElementById('title-text');
+
+        function typeWriter() {
+            if (charIndex < textToType.length) {
+                titleSpan.textContent += textToType.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeWriter, 120);
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(typeWriter, 400);
+        });
+
+        // Generate Starry Sky
+        const starsContainer = document.getElementById('stars-container');
+        const starCount = 60;
+
+        for (let i = 0; i < starCount; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            const size = Math.random() * 2 + 1;
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            star.style.top = `${Math.random() * 100}%`;
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.setProperty('--duration', `${Math.random() * 4 + 2}s`);
+            star.style.setProperty('--opacity', Math.random() * 0.6 + 0.2);
+            star.style.animationDelay = `${Math.random() * 5}s`;
+            starsContainer.appendChild(star);
+        }
+
+        // Generate More Frequent Shooting Stars
+        function createShootingStar() {
+            const shootingStar = document.createElement('div');
+            shootingStar.className = 'shooting-star';
+            shootingStar.style.top = `${Math.random() * 50}%`;
+            shootingStar.style.left = `${Math.random() * 60 + 40}%`;
+            shootingStar.style.width = `${Math.random() * 70 + 40}px`;
+            shootingStar.style.animationDuration = `${Math.random() * 1.5 + 2}s`;
+            shootingStar.style.animationDelay = `${Math.random() * 1}s`;
+            starsContainer.appendChild(shootingStar);
+
+            setTimeout(() => {
+                shootingStar.remove();
+            }, 4500);
+        }
+
+        setInterval(createShootingStar, 2500);
+
+        // Generate Delicate Internal Cascade (Exclusively pink flowers and seedlings)
+        const cardCascadeContainer = document.getElementById('card-cascade-container');
+        const cascadeSymbols = [
+            '<i class="fa-solid fa-seedling"></i>', 
+            '<i class="fa-solid fa-spa"></i>', 
+            '<i class="fa-solid fa-feather"></i>', 
+            '<i class="fa-solid fa-leaf"></i>'
+        ];
+
+        function createCardCascadeItem() {
+            const item = document.createElement('div');
+            item.className = 'card-cascade-item';
+            item.innerHTML = cascadeSymbols[Math.floor(Math.random() * cascadeSymbols.length)];
+            item.style.left = `${Math.random() * 90 + 5}%`;
+            item.style.fontSize = `${Math.random() * 14 + 12}px`;
+            const duration = Math.random() * 2 + 3.5;
+            item.style.setProperty('--duration', `${duration}s`);
+            cardCascadeContainer.appendChild(item);
+
+            setTimeout(() => {
+                item.remove();
+            }, duration * 1000);
+        }
+
+        setInterval(createCardCascadeItem, 1200);
+
+        // Modal Functions
+        function openModal() {
+            const modal = document.getElementById('custom-modal');
+            const modalBox = document.getElementById('modal-box');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modalBox.classList.remove('scale-75', 'opacity-0');
+                modalBox.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('custom-modal');
+            const modalBox = document.getElementById('modal-box');
+            modal.classList.add('opacity-0');
+            modalBox.classList.remove('scale-100', 'opacity-100');
+            modalBox.classList.add('scale-75', 'opacity-0');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        // Formspree Wish Submission
+        function submitWish(wishText, wishValue) {
+            const msgEl = document.getElementById('wish-message');
+            document.getElementById('wish-type-input').value = wishValue;
+            if (wishValue === 'Abrazo') {
+                msgEl.textContent = "🤗 ¡Un abrazito cálido enviado con éxito! Que sientas mucho amorcito esta noche.";
+            } else if (wishValue === 'Abrazo Grande') {
+                msgEl.textContent = "🫂 ¡Un abrazo gigante y apretado directo para ti! Que descanses riquísimo.";
+            }
+        }
+    </script>
+</body>
+</html>
